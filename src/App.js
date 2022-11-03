@@ -1,17 +1,30 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
+import SingleBlog from "./Pages/SingleBlog";
 import './App.css';
 
 const urlEndpoint = "http://localhost:4000"
 
 function App() {
   const [blogs, setBlogs] = useState([])
+  const [id, setId] = useState("043328c9-1e49-42c1-ac88-8177eb548b81")
+  const [blog, setBlog] = useState({})
 
+  // useEffect(() => {
+  //   const findBlog = async () => {
+  //     const result = await fetch(`${urlEndpoint}/blogs/one/${id}`)
+  //     const foundBlog = await result.json()
+  //     setBlog(foundBlog.blog)
+  //   }
+  //   findBlog()
+  // }, [id])
+
+  // This useEffect is for the "all" route. Its fetching the url, which is making a database request via http, waits for a promise. It comes back to await result.json() which we are setting to variable fetchedBlogs.
   useEffect(()=>{
     const fetchBlogs = async () => {
-      const result = await fetch(`${urlEndpoint}/blogs/all`)
-      const fetchedBlogs = await result.json()
-      // console.log(fetchedBlogs)
-      setBlogs(fetchedBlogs.blogs)
+      const response = await fetch(`${urlEndpoint}/blogs/all`)
+      const fetchedBlogs = await response.json()
+      // console.log("fetchedBlogs" fetchedBlogs)
+      setBlogs(fetchedBlogs.blog)
     }
     fetchBlogs()
   }, [])
@@ -19,13 +32,18 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <br></br>
+      <SingleBlog urlEndpoint={urlEndpoint}/>
         {blogs.map((blog, index)=>{
           return (
             <div key={index}>
-              {blog.title}
+              <p>Title: {blog.title}</p>
+              <p>ID: {blog.id}</p>
             </div>
           )
         })}
+        <input type="text" onChange={(e) => {setId(e.target.value)}}></input>
+        <br></br>
       </header>
     </div>
   );
