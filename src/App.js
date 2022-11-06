@@ -9,15 +9,6 @@ function App() {
   const [id, setId] = useState("043328c9-1e49-42c1-ac88-8177eb548b81")
   const [blog, setBlog] = useState({})
 
-  // useEffect(() => {
-  //   const findBlog = async () => {
-  //     const result = await fetch(`${urlEndpoint}/blogs/one/${id}`)
-  //     const foundBlog = await result.json()
-  //     setBlog(foundBlog.blog)
-  //   }
-  //   findBlog()
-  // }, [id])
-
   // This useEffect is for the "all" route. Its fetching the url, which is making a database request via http, waits for a promise. It comes back to await result.json() which we are setting to variable fetchedBlogs.
   useEffect(()=>{
     const fetchBlogs = async () => {
@@ -33,7 +24,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         <br></br>
-      <SingleBlog urlEndpoint={urlEndpoint}/>
+      <SingleBlog urlEndpoint={urlEndpoint}
+      blogs={blogs}/>
         {blogs.map((blog, index)=>{
           return (
             <div key={index}>
@@ -42,7 +34,7 @@ function App() {
             </div>
           )
         })}
-        <input type="text" onChange={(e) => {setId(e.target.value)}}></input>
+        {/* <input type="text" onChange={(e) => {setId(e.target.value)}}></input> */}
         <br></br>
       </header>
     </div>

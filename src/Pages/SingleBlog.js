@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react"
 
-/* 
-Instead of a text input handler that we need to copy/paste the blog id into, create an option/select dropdown that will have all of the id's of our blogs as options. And when the select onChange event is triggered, we want to fetch the blog that the user selected. I.E. Create a dropdown menu of blog id's and then when the user selects particular blog id in the dropdown, that blog should display to the page in <SingleBlog/>.
-
-*/
 const SingleBlog = (props) => {
-	const {urlEndpoint} = props
+	const {urlEndpoint, blogs} = props
 	const [singleBlog, setSingleBlog] = useState({})
-	const [id, setId] = useState("4a571289-6d5c-4300-9614-53c6e1237d81")
+	const [id, setId] = useState("dcc2102d-a20a-4765-8dc4-9079af4vsc96")
 
 	useEffect(()=>{
 		const fetchBlog = async () => {
@@ -23,14 +19,29 @@ const SingleBlog = (props) => {
 	console.log("ID outside of jsx ", id)
 
 	return (
-		<div>
-			Single Blog
-			<p>{singleBlog.title}</p>
-			<p>{singleBlog.id}</p>
-			<p>{singleBlog.text}</p>
-			<input type="text" onChange={(e)=>{
+		<div className="single-blog">
+			<h2>Single Blog</h2>
+			<p className="single-title">Title: {singleBlog.title}</p>
+			<p className="single-id">ID: {singleBlog.id}</p>
+			<p className="single-text">{singleBlog.text}</p>
+			<input value={id} type="text" onChange={(e)=>{
 				setId(e.target.value)
 			}}/>
+			<br></br><br></br>
+			<label for="blogs">Choose a Blog ID </label>
+			<br></br>
+			<select value={id}onChange={(e)=>{
+				setId(e.target.value)
+			}}>
+				<option selected></option>
+				{blogs.map((blog, index)=>{
+					return <option key={index}>{blog.id}</option>
+				})}
+				{/* <option>Blog 1</option>
+				<option>Blog 2</option>
+				<option>Blog 3</option>
+				<option>Blog 4</option> */}
+			</select>
 			<hr/>
 		</div>
 	)

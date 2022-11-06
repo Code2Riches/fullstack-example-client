@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.single-blog {
+  color: lightslategray
+}
+
+.single-title {
+  color: lightblue
+}
+
+.single-id {
+  color: lightcoral
+}
+
+.single-text {
+  color: lightblue
+}
