@@ -28,7 +28,7 @@ const SingleBlog = (props) => {
 				setId(e.target.value)
 			}}/>
 			<br></br><br></br>
-			<label for="blogs">Choose a Blog ID </label>
+			<label for="blogs">Choose a Blog ID</label>
 			<br></br>
 			<select value={id}onChange={(e)=>{
 				setId(e.target.value)
