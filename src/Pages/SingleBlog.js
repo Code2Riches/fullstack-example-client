@@ -2,15 +2,19 @@ import { useEffect, useState } from "react"
 
 const SingleBlog = (props) => {
 	const {urlEndpoint, blogs} = props
+	const [newBlogs, setNewBlogs] = useState([])
 	const [singleBlog, setSingleBlog] = useState({})
 	const [id, setId] = useState("dcc2102d-a20a-4765-8dc4-9079af4vsc96")
 
+
+
+
 	useEffect(()=>{
 		const fetchBlog = async () => {
-			console.log("fetchBlog")
+			// console.log("fetchBlog")
 			const result = await fetch(`${urlEndpoint}/blogs/get-one/${id}`)
 			const blogPayload = await result.json()
-			console.log(blogPayload)
+			// console.log(blogPayload)
 			setSingleBlog(blogPayload.blog)
 		}
 		fetchBlog()
@@ -37,10 +41,6 @@ const SingleBlog = (props) => {
 				{blogs.map((blog, index)=>{
 					return <option key={index}>{blog.id}</option>
 				})}
-				{/* <option>Blog 1</option>
-				<option>Blog 2</option>
-				<option>Blog 3</option>
-				<option>Blog 4</option> */}
 			</select>
 			<hr/>
 		</div>

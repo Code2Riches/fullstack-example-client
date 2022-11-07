@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
 import SingleBlog from "./Pages/SingleBlog";
+import CreateBlogForm from "./Pages/CreateBlogForm";
 import './App.css';
 
 const urlEndpoint = "http://localhost:4000"
@@ -12,18 +13,19 @@ function App() {
   // This useEffect is for the "all" route. Its fetching the url, which is making a database request via http, waits for a promise. It comes back to await result.json() which we are setting to variable fetchedBlogs.
   useEffect(()=>{
     const fetchBlogs = async () => {
-      const response = await fetch(`${urlEndpoint}/blogs/all`)
-      const fetchedBlogs = await response.json()
-      // console.log("fetchedBlogs" fetchedBlogs)
-      setBlogs(fetchedBlogs.blog)
-    }
-    fetchBlogs()
-  }, [])
+      const result = await fetch(`${urlEndpoint}/blogs/all`);
+      const fetchedBlogs = await result.json();
+      // console.log("fetchedBlogs" fetchedBlogs);
+      setBlogs(fetchedBlogs.blog);
+    };
+    fetchBlogs();
+  }, []);
 
   return (
     <div className="App">
       <header className="App-header">
         <br></br>
+        <CreateBlogForm urlEndpoint={urlEndpoint}/>
       <SingleBlog urlEndpoint={urlEndpoint}
       blogs={blogs}/>
         {blogs.map((blog, index)=>{
