@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 import SingleBlog from "./Pages/SingleBlog";
 import CreateBlogForm from "./Pages/CreateBlogForm";
+import UpdateBlogForm from "./Pages/UpdateBlogForm";
 import './App.css';
 
 const urlEndpoint = "http://localhost:4000"
@@ -25,9 +26,11 @@ function App() {
     <div className="App">
       <header className="App-header">
         <br></br>
+        <UpdateBlogForm urlEndpoint={urlEndpoint}
+          blogs={blogs}/>
         <CreateBlogForm urlEndpoint={urlEndpoint}/>
-      <SingleBlog urlEndpoint={urlEndpoint}
-      blogs={blogs}/>
+        <SingleBlog urlEndpoint={urlEndpoint}
+        blogs={blogs}/>
         {blogs.map((blog, index)=>{
           return (
             <div key={index}>
